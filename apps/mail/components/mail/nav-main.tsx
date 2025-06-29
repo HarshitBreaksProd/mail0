@@ -1,9 +1,8 @@
-import { useTranslations } from 'use-intl';
+import { m } from '@/paraglide/messages';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const NavMain: React.FC = () => {
-  const t = useTranslations();
   const [state, setState] = useState<'collapsed' | 'expanded'>('collapsed');
 
   const handleToggle = () => {

@@ -226,7 +226,17 @@
       "toSave": "保存する",
       "label": "ラベル：",
       "search": "メモを検索…",
-      "noteCount": "{count, plural, =0 {Add notes} one {# note} other {# notes}}",
+      "noteCount": [
+        {
+          "declarations": ["input count", "local countPlural = count: plural"],
+          "selectors": ["countPlural"],
+          "match": {
+            "countPlural=0": "Add notes",
+            "countPlural=one": "# note",
+            "countPlural=other": "# notes"
+          }
+        }
+      ],
       "notePinned": "メモをピン留めしました",
       "noteUnpinned": "メモのピン留めを解除しました",
       "colorChanged": "メモの色が更新されました",

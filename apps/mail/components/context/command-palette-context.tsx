@@ -54,9 +54,9 @@ import { useLabels } from '@/hooks/use-labels';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { useTranslations } from 'use-intl';
 import { format, subDays } from 'date-fns';
 import { VisuallyHidden } from 'radix-ui';
+import { m } from '@/paraglide/messages';
 import { Pencil2 } from '../icons/icons';
 import { Button } from '../ui/button';
 import { useQueryState } from 'nuqs';
@@ -196,7 +196,7 @@ export function CommandPalette({ children }: { children: React.ReactNode }) {
   const [commandInputValue, setCommandInputValue] = useState('');
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const t = useTranslations();
+
   const { data: userLabels = [] } = useLabels();
   const trpc = useTRPC();
   const { mutateAsync: generateSearchQuery, isPending } = useMutation(
@@ -716,7 +716,7 @@ export function CommandPalette({ children }: { children: React.ReactNode }) {
         group.items.forEach((navItem) => {
           if (navItem.disabled) return;
           const item: CommandItem = {
-            title: t(navItem.title as MessageKey),
+            title: navItem.title,
             icon: navItem.icon,
             url: navItem.url,
             shortcut: navItem.shortcut,
@@ -760,7 +760,7 @@ export function CommandPalette({ children }: { children: React.ReactNode }) {
         let groupTitle = groupKey;
         try {
           const translationKey = `common.commandPalette.groups.${groupKey}` as any;
-          groupTitle = t(translationKey) || groupKey;
+          groupTitle = (m as any)[translationKey]() || groupKey;
         } catch {}
 
         result.push({
@@ -771,7 +771,7 @@ export function CommandPalette({ children }: { children: React.ReactNode }) {
     });
 
     return result;
-  }, [pathname, t, setIsComposeOpen, quickFilterOptions]);
+  }, [pathname, setIsComposeOpen, quickFilterOptions]);
 
   const hasMatchingCommands = useMemo(() => {
     if (!commandInputValue.trim()) return true;
@@ -1888,8 +1888,8 @@ export function CommandPalette({ children }: { children: React.ReactNode }) {
         }}
       >
         <VisuallyHidden.VisuallyHidden>
-          <DialogTitle>{t('common.commandPalette.title')}</DialogTitle>
-          <DialogDescription>{t('common.commandPalette.description')}</DialogDescription>
+          <DialogTitle>{m['common.commandPalette.title']()}</DialogTitle>
+          <DialogDescription>{m['common.commandPalette.description']()}</DialogDescription>
         </VisuallyHidden.VisuallyHidden>
         {renderView()}
       </CommandDialog>

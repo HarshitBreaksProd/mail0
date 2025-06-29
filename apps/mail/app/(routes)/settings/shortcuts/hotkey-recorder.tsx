@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { MessageKey } from '@/config/navigation';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'use-intl';
+import { m } from '@/paraglide/messages';
 
 interface HotkeyRecorderProps {
   isOpen: boolean;
@@ -16,7 +16,6 @@ export function HotkeyRecorder({
   onHotkeyRecorded,
   currentKeys,
 }: HotkeyRecorderProps) {
-  const t = useTranslations();
   const [recordedKeys, setRecordedKeys] = useState<string[]>([]);
   const [isRecording, setIsRecording] = useState(false);
 
@@ -68,14 +67,14 @@ export function HotkeyRecorder({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {t('pages.settings.shortcuts.actions.recordHotkey' as MessageKey)}
+            {m['pages.settings.shortcuts.actions.recordHotkey' as MessageKey]()}
           </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center gap-4 py-4">
           <div className="text-muted-foreground text-center text-sm">
             {isRecording
-              ? t('pages.settings.shortcuts.actions.pressKeys' as MessageKey)
-              : t('pages.settings.shortcuts.actions.releaseKeys' as MessageKey)}
+              ? m['pages.settings.shortcuts.actions.pressKeys' as MessageKey]()
+              : m['pages.settings.shortcuts.actions.releaseKeys' as MessageKey]()}
           </div>
           <div className="flex gap-2">
             {(recordedKeys.length > 0 ? recordedKeys : currentKeys).map((key) => (

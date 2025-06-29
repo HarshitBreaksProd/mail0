@@ -56,12 +56,12 @@ export const cookiePreferencesRouter = router({
       setCookie(ctx.c, COOKIE_CONSENT_KEY, JSON.stringify(newPreferences));
       return newPreferences;
     }),
-  setLocaleCookie: publicProcedure
-    .input(z.object({ locale: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      setCookie(ctx.c, 'i18n:locale', input.locale, {
-        domain: env.COOKIE_DOMAIN,
-      });
-      return { success: true };
-    }),
+  //   setLocaleCookie: publicProcedure
+  //     .input(z.object({ locale: z.string() }))
+  //     .mutation(async ({ ctx, input }) => {
+  //       setCookie(ctx.c, 'i18n:locale', input.locale, {
+  //         domain: env.COOKIE_DOMAIN,
+  //       });
+  //       return { success: true };
+  //     }),
 });
